@@ -2,3 +2,7 @@
 data
 model
 *.txt
+storeETL
+featureNormalizer.py
+Main.py
+.DS_Store
