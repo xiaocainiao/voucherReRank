@@ -59,12 +59,13 @@ def evaluation():
         # 分类
         lr = LogisticRegression(C=51)
         lr.fit(x_train, y_train)
-        y_pred = lr.predict(x_test)
+        y_pred = lr.predict_proba(x_test)[:,1]
+        # y_pred = lr.predict_proba(x_test)
 
 
         # 效果评估
-        target_names = ['class 0', 'class 1']
-        print classification_report(y_test, y_pred, target_names=target_names)
+        # target_names = ['class 0', 'class 1']
+        # print classification_report(y_test, y_pred, target_names=target_names)
 
         fpr, tpr, thresholds = roc_curve(y_test, y_pred, pos_label=1)
         auc_value = auc(fpr, tpr)

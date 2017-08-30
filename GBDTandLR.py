@@ -7,8 +7,7 @@ from config import *
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.preprocessing import *
 from sklearn.metrics import *
-from sklearn.feature_selection import SelectKBest
-from sklearn.feature_selection import chi2
+from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import *
 
 # 划分数据集
@@ -25,9 +24,6 @@ X = feature.values
 print len(feature.columns)
 y = df['label'].values
 
-#选择K个最好的特征，返回选择特征后的数据
-# X = SelectKBest(chi2, k=30).fit_transform(X, y)
-# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=5)
 
 # 5折交叉验证
 AUC = []
@@ -44,9 +40,27 @@ for train_index, test_index in skf.split(X, y):
                                       min_samples_split=90, max_features=31, subsample=0.9, random_state=10)
     # gbdt = GradientBoostingClassifier(learning_rate=0.1, n_estimators=60,max_depth=7, min_samples_leaf =60,
     #            min_samples_split =1200, max_features='sqrt', subsample=0.8, random_state=10)
+
+    # 对训练集再进行划分
+    x_train, x_train_lr, y_train, y_train_lr = train_test_split(x_train, y_train, test_size=0.5)
+
+    # 调用one-hot编码。
+    grd_enc = OneHotEncoder()
+
+    # 调用LR分类模型。
+    grd_lr = LogisticRegression()
+
     gbdt.fit(x_train, y_train)
-    y_pred = gbdt.predict_proba(x_test)[:,1]
-    # y_pred = gbdt.predict(x_test)
+
+    # fit one-hot编码器 apply()返回的多维数组 shape = [n_samples, n_estimators, n_classes]，二分类中n_classes=1
+    grd_enc.fit(gbdt.apply(x_train)[:, :, 0])
+    print grd_enc.transform(gbdt.apply(x_train)[:,:,0])
+    # 使用训练好的GBDT模型构建特征，然后将特征经过one-hot编码作为新的特征输入到LR模型训练。
+    grd_lr.fit(grd_enc.transform(gbdt.apply(x_train_lr)[:, :, 0]), y_train_lr)
+
+    # 用训练好的LR模型多X_test做预测
+    y_pred = grd_lr.predict_proba(grd_enc.transform(gbdt.apply(x_test)[:, :, 0]))[:, 1]
+    # y_pred = grd_lr.predict(grd_enc.transform(gbdt.apply(x_test)[:, :, 0]))
 
     # 效果评估
     # target_names = ['class 0', 'class 1']
