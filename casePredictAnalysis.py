@@ -1,14 +1,7 @@
 #coding:utf-8
 __author__ = 'liangnan03@meituan.com'
 
-import json
-import pandas as pd
-import numpy as np
-import os
 from util import *
-from sklearn.model_selection import StratifiedShuffleSplit
-
-
 
 if __name__ == '__main__':
     file = open("caseFeature.txt",'r')
@@ -92,14 +85,12 @@ if __name__ == '__main__':
                 if k == 49:
                     f[0] = value
                 else:
-                    # value = (features[k] - MM[used_feature_id.index(k)][0])/(MM[used_feature_id.index(k)][1]-MM[used_feature_id.index(k)][0])
                     f[used_feature_id.index(k) + 1] = value
         F.append(f)
     F = np.array(F)
-    print F
-    XX = F/(F[-1,:])
-    print XX
 
+    print "use sigmoid function..."
+    XX = F/(F[-1,:])
     p = sigmoid(XX, weight, b)
     print list(p)
 
@@ -113,24 +104,5 @@ if __name__ == '__main__':
     F = sc.transform(F)
 
     pp = LogisticRegression.predict_proba(lr, F)
+    print "load lr model..."
     print [e[1] for e in pp]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

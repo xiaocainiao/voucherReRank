@@ -1,9 +1,6 @@
 #coding:utf-8
 __author__ = 'liangnan03@meituan.com'
 
-import pandas as pd
-import numpy as np
-from config import *
 from util import *
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import *
@@ -13,15 +10,17 @@ from sklearn.model_selection import StratifiedKFold
 def getDataSet():
     # 划分数据集
     df = pd.read_csv(total_raw_features, sep='\t')
-    # df = pd.read_csv('./data/features/raw_features_20170801_ver1.csv', sep='\t')
+
+    # 丢弃目前不使用的特征
     feature = df.fillna(value=0).drop(['is_nobook','is_holiday_used','is_booth_used',
                                        'min_person_cnt','max_person_cnt','avg_person_cnt','interval_person_cnt',
                                        'item_index','page_city_id','geo_city_id','used_period',
                                        'mt_second_cate_id','mt_second_cate_name','mt_third_cate_id','mt_third_cate_name',
                                        'is_travel_master','cities_week_city','label'], axis=1)
     feature = feature.ix[:, (feature != feature.ix[0]).any()]
-    print feature
+
     X = feature.values
+    print sorted(X[:,0])[-400]
     print len(feature.columns)
     y = df['label'].values
 
@@ -29,7 +28,7 @@ def getDataSet():
     # X = SelectKBest(chi2, k=30).fit_transform(X, y)
     return X, y, feature
 
-# 5折交叉验证
+# 10折交叉验证
 def evaluation():
     AUC = []
     skf= StratifiedKFold(n_splits=10, shuffle=True)
@@ -58,7 +57,7 @@ def evaluation():
             x_test = mm.transform(X_test)
 
         # 分类
-        lr = LogisticRegression(C=200)
+        lr = LogisticRegression(C=51)
         lr.fit(x_train, y_train)
         y_pred = lr.predict(x_test)
 
@@ -93,12 +92,13 @@ def training(X, y):
         mm.fit(X_train)
         x_train = mm.transform(X_train)
 
-    lr = LogisticRegression(C=200)
+    lr = LogisticRegression(C=51)
     lr.fit(x_train, y_train)
     from sklearn.externals import joblib
     joblib.dump(lr, 'lr.model')
 
     return lr.coef_, lr.intercept_
+
 
 def predictWithGlobalMinMax(X, y):
     MIN_MAX = checkMinMaxValue(feature.columns)

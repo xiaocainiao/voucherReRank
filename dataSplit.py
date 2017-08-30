@@ -55,13 +55,14 @@ def missingValueProcessor(data):
     return data
 
 if __name__ == '__main__':
-    files = ['vrr_samples_20170721.xlsx','vrr_samples_20170722.xlsx', 'vrr_samples_20170723.xlsx', 'vrr_samples_20170724.xlsx', 'vrr_samples_20170725.xlsx',
-             'vrr_samples_20170726.xlsx','vrr_samples_20170727.xlsx','vrr_samples_20170728.xlsx','vrr_samples_20170729.xlsx', 'vrr_samples_20170730.xlsx',
-             'vrr_samples_20170731.xlsx','vrr_samples_20170801.xlsx','vrr_samples_20170802.xlsx','vrr_samples_20170803.xlsx','vrr_samples_20170804.xlsx',
-             'vrr_samples_20170805.xlsx','vrr_samples_20170806.xlsx','vrr_samples_20170807.xlsx','vrr_samples_20170808.xlsx','vrr_samples_20170809.xlsx',
-             'vrr_samples_20170810.xlsx', 'vrr_samples_20170811.xlsx', 'vrr_samples_20170812.xlsx','vrr_samples_20170813.xlsx', 'vrr_samples_20170814.xlsx',
-             'vrr_samples_20170815.xlsx', 'vrr_samples_20170816.xlsx', 'vrr_samples_20170817.xlsx','vrr_samples_20170818.xlsx', 'vrr_samples_20170819.xlsx',
-             'vrr_samples_20170820.xlsx', 'vrr_samples_20170821.xlsx','vrr_samples_20170822.xlsx','vrr_samples_20170823.xlsx']
+    files = ['vrr_samples_20170721.xlsx', 'vrr_samples_20170722.xlsx', 'vrr_samples_20170723.xlsx', 'vrr_samples_20170724.xlsx', 'vrr_samples_20170725.xlsx',
+             'vrr_samples_20170726.xlsx', 'vrr_samples_20170727.xlsx', 'vrr_samples_20170728.xlsx', 'vrr_samples_20170729.xlsx', 'vrr_samples_20170730.xlsx',
+             'vrr_samples_20170731.xlsx', 'vrr_samples_20170801.xlsx', 'vrr_samples_20170802.xlsx', 'vrr_samples_20170803.xlsx', 'vrr_samples_20170804.xlsx',
+             'vrr_samples_20170805.xlsx', 'vrr_samples_20170806.xlsx', 'vrr_samples_20170807.xlsx', 'vrr_samples_20170808.xlsx', 'vrr_samples_20170809.xlsx',
+             'vrr_samples_20170810.xlsx', 'vrr_samples_20170811.xlsx', 'vrr_samples_20170812.xlsx', 'vrr_samples_20170813.xlsx', 'vrr_samples_20170814.xlsx',
+             'vrr_samples_20170815.xlsx', 'vrr_samples_20170816.xlsx', 'vrr_samples_20170817.xlsx', 'vrr_samples_20170818.xlsx', 'vrr_samples_20170819.xlsx',
+             'vrr_samples_20170820.xlsx', 'vrr_samples_20170821.xlsx', 'vrr_samples_20170822.xlsx', 'vrr_samples_20170823.xlsx', 'vrr_samples_20170824.xlsx',
+             'vrr_samples_20170825.xlsx', 'vrr_samples_20170826.xlsx', 'vrr_samples_20170827.xlsx']
 
     Data = pd.DataFrame()
 

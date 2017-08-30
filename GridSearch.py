@@ -30,15 +30,13 @@ def LRGridSearch(X_train, y_train):
     param_grid = {'C': range(1,2000,10)}
     clf = GridSearchCV(LogisticRegression(penalty='l2'), param_grid)
     clf = clf.fit(x_train, y_train)
-    # GridSearchCV(cv=None, estimator=LogisticRegression(C=1.0, intercept_scaling=1, dual=False, fit_intercept=True,
-    #           penalty='l2', tol=0.0001),
-    #        param_grid={'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000]})
+
     print clf.best_params_
     print clf.best_score_
 
 
 def GBDTGridSearch(X_train, y_train):
-
+    method
     # param_grid = {'n_estimators': range(30, 110, 10)}
     # param_grid ={'max_depth':range(5,14,2), 'min_samples_split':range(2,50,5)}
     # param_grid = {'min_samples_split': range(40, 100, 10), 'min_samples_leaf': range(1, 20, 2)}
@@ -63,8 +61,6 @@ def GBDTHyperopt(X_train, y_train):
 
 
 if __name__ == '__main__':
-    # method = "GBDT"
-    method = "LR"
 
     # 划分数据集
     df = pd.read_csv(total_raw_features, sep='\t')
