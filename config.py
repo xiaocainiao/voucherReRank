@@ -10,7 +10,7 @@ total_raw_features = './data/features/raw_features.csv'
 
 
 # model path
-model_need_output = False
+model_need_output = True
 model_path = './model'
 model_config_file = './model/output_config_file.txt'
 model_train_params = 'weights.txt'

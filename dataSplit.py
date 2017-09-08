@@ -62,7 +62,8 @@ if __name__ == '__main__':
              'vrr_samples_20170810.xlsx', 'vrr_samples_20170811.xlsx', 'vrr_samples_20170812.xlsx', 'vrr_samples_20170813.xlsx', 'vrr_samples_20170814.xlsx',
              'vrr_samples_20170815.xlsx', 'vrr_samples_20170816.xlsx', 'vrr_samples_20170817.xlsx', 'vrr_samples_20170818.xlsx', 'vrr_samples_20170819.xlsx',
              'vrr_samples_20170820.xlsx', 'vrr_samples_20170821.xlsx', 'vrr_samples_20170822.xlsx', 'vrr_samples_20170823.xlsx', 'vrr_samples_20170824.xlsx',
-             'vrr_samples_20170825.xlsx', 'vrr_samples_20170826.xlsx', 'vrr_samples_20170827.xlsx']
+             'vrr_samples_20170825.xlsx', 'vrr_samples_20170826.xlsx', 'vrr_samples_20170827.xlsx', 'vrr_samples_20170828.xlsx', 'vrr_samples_20170829.xlsx',
+             'vrr_samples_20170830.xlsx', 'vrr_samples_20170831.xlsx', 'vrr_samples_20170901.xlsx', 'vrr_samples_20170902.xlsx', 'vrr_samples_20170903.xlsx']
 
     Data = pd.DataFrame()
 

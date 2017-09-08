@@ -57,7 +57,7 @@ def evaluation():
             x_test = mm.transform(X_test)
 
         # 分类
-        lr = LogisticRegression(C=51)
+        lr = LogisticRegression(C=41)
         lr.fit(x_train, y_train)
         y_pred = lr.predict_proba(x_test)[:,1]
         # y_pred = lr.predict_proba(x_test)
@@ -89,11 +89,22 @@ def training(X, y):
         nl.fit(X_train)
         x_train = nl.transform(X_train)
     else:
-        mm = MinMaxScaler()
-        mm.fit(X_train)
-        x_train = mm.transform(X_train)
+        # mm = MinMaxScaler()
+        # mm.fit(X_train)
+        # x_train = mm.transform(X_train)
+        data = sorted(X_train[:, 0])[int(len(X_train[:, 0]) * 0.967)]
+        print data
+        min_max = []
+        for f in np.array(X).transpose():
+            min_max.append([min(f), max(f)])
+        min_max[0][1] = data * 1000
+        min_max[0][0] *= 1000
+        x_train = []
+        for i, x in enumerate(X_train.transpose()):
+            x_train.append((x - min_max[i][0]) / (min_max[i][1] - min_max[i][0]))
+        x_train = np.array(x_train).transpose()
 
-    lr = LogisticRegression(C=51)
+    lr = LogisticRegression(C=41)
     lr.fit(x_train, y_train)
     from sklearn.externals import joblib
     joblib.dump(lr, 'lr.model')
@@ -125,10 +136,15 @@ if __name__ == '__main__':
     if procedure == 'evaluation':
         evaluation()
     elif procedure == 'train':
-        w, b = training(X, y)
         min_max = []
+        data = X[:, 0]
+        print "sort by data"
+        data = sorted(data)[int(len(data) * 0.967)]
+        print data
         for f in np.array(X).transpose():
             min_max.append([min(f), max(f)])
+        min_max[0][1] = data * 1000
+        min_max[0][0] *= 1000
         mapLRFeature(columns=fs, weights=list(w[0]), bias=list(b), min_max=min_max)
     elif procedure == 'predict':
         predictWithGlobalMinMax(X, y)

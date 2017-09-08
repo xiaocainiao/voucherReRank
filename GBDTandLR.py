@@ -54,7 +54,7 @@ for train_index, test_index in skf.split(X, y):
 
     # fit one-hot编码器 apply()返回的多维数组 shape = [n_samples, n_estimators, n_classes]，二分类中n_classes=1
     grd_enc.fit(gbdt.apply(x_train)[:, :, 0])
-    print grd_enc.transform(gbdt.apply(x_train)[:,:,0])
+
     # 使用训练好的GBDT模型构建特征，然后将特征经过one-hot编码作为新的特征输入到LR模型训练。
     grd_lr.fit(grd_enc.transform(gbdt.apply(x_train_lr)[:, :, 0]), y_train_lr)
 
